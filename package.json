@@ -5,18 +5,40 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
+    "babel-preset-stage-1": "^6.16.0",
+    "bluebird": "^3.4.7",
     "leaflet": "^1.0.1",
-    "leaflet.markercluster": "^1.0.0",
-    "material-ui": "^0.16.1",
+    "leaflet.markercluster": "^1.0.3",
+    "material-ui": "^0.16.3",
     "meteor-node-stubs": "~0.2.0",
-    "nqm-api-tdx": "^0.1.20",
     "react": "^15.3.2",
+    "react-addons-create-fragment": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
+    "react-addons-linked-state-mixin": "^15.3.2",
+    "react-addons-perf": "^15.3.2",
+    "react-addons-pure-render-mixin": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-addons-update": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-komposer": "^1.13.1",
-    "react-leaflet": "^1.0.0-rc.3",
+    "react-leaflet": "^1.0.0-rc.1",
     "react-mounter": "^1.2.0",
-    "react-tap-event-plugin": "^1.0.0",
-    "request": "^2.78.0"
-  }
+    "react-tap-event-plugin": "^2.0.1",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.37"
+  },
+  "description": "NQM App HighWay",
+  "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nqminds/nqm-app-highway.git"
+  },
+  "author": "Alexandru Mereacre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nqminds/nqm-app-highway/issues"
+  },
+  "homepage": "https://github.com/nqminds/nqm-app-highway#readme"
 }
