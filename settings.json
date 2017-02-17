@@ -1,0 +1,16 @@
+{
+  "public": {
+    "ddpServerURL": "https://tbx.nq-m.com/",
+    "authServerURL": "https://tdx.nq-m.com",
+    "commandHost": "https://cmd.nq-m.com",
+    "queryHost": "https://q.nq-m.com",
+    "ddpServerURL": "https://tbx.nq-m.com/",
+    "resourceId": "Hkg_uRABel",
+    "latestId":"SklqqPN5gx",
+    "cameraLiveId":"SJgAPOy0eg",
+    "shareId":"H1g9B29Ele",
+   "shareKey":"1234554321",
+   "apiURL":"https://nqm-databot-highway.nq-m.com/",
+   "showAppBar": true
+  }
+}

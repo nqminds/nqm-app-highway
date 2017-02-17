@@ -1,0 +1,22 @@
+{
+  "name": "nqm-app-highway",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "leaflet": "^1.0.1",
+    "leaflet.markercluster": "^1.0.0",
+    "material-ui": "^0.16.1",
+    "meteor-node-stubs": "~0.2.0",
+    "nqm-api-tdx": "^0.1.20",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-komposer": "^1.13.1",
+    "react-leaflet": "^1.0.0-rc.3",
+    "react-mounter": "^1.2.0",
+    "react-tap-event-plugin": "^1.0.0",
+    "request": "^2.78.0"
+  }
+}
