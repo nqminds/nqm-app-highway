@@ -60,6 +60,11 @@ class MapDisplay extends Component{
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+        <MarkerCluster
+          data={this.props.cameraData}
+          timeData={this.props.timeData}
+          onClick={this._handleClick}
+        />
         <Control position="topleft" >
           <div className="progress-bar">
             <MuiThemeProvider>
@@ -73,7 +78,6 @@ class MapDisplay extends Component{
             </MuiThemeProvider>
           </div>
         </Control>
-        <MarkerCluster data={this.props.cameraData} timeData={this.props.timeData} onClick={this._handleClick} />
       </Map>
     )
   }
