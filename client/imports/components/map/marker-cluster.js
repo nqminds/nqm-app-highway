@@ -1,6 +1,7 @@
 import React,{PropTypes} from "react";
 import ReactDOM from 'react-dom';
 import {MapLayer} from "react-leaflet";
+import Leaflet from "leaflet";
 
 let _=lodash;
 class MarkerCluster extends MapLayer{
@@ -16,6 +17,7 @@ class MarkerCluster extends MapLayer{
     this.props.onClick();
   }
   mountMarkers(timeData){
+    console.log(Leaflet);
     console.log(timeData[0]["timestamp"]);
     let markers = [];
     this.leafletElement = L.markerClusterGroup();
