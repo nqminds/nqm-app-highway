@@ -1,61 +1,75 @@
-import { Meteor } from 'meteor/meteor';
-import {HTTP} from "meteor/http";
-import Promise from "bluebird";
-import request from "request";
+module.exports = (function(settings) {
+  "use strict";
 
-Meteor.startup(() => {
-  // code to run on server at startup
-  Meteor.methods({
-    "getBase64String":function(folderName,fileIndex){
-      var getURL = Meteor.settings.public.apiURL+"img/"+folderName+"/"+fileIndex;
-      console.log(getURL);
-      var options = {
-                      headers: 
-                        {
-                          'Content-Type': 'image/gif',
-                          "User-Agent": "Meteor/1.0"
-                        },
-                      npmRequestOptions: {
-                          encoding: "base64"
-                        }
-                    }
-      Promise.promisifyAll(HTTP);
-      return HTTP.callAsync("GET",getURL,options)
-        .then((response) => {
-          console.log("meteor server response");
-          //console.log(response);
-          return response.content;
-        })
-        .catch((err) => {
-          console.log("meteor server error");
-          console.log(err);
-          return err;
-        })
-    },
-    "getTimestamp":function(folderName,fileIndex){
-      var getURL = Meteor.settings.public.apiURL+"id/"+folderName+"/"+fileIndex;
-      var options = {
-                      headers: 
-                        {
-                          'Content-Type': 'application/json',
-                          "User-Agent": "Meteor/1.0"
-                        },
-                      npmRequestOptions: {
-                          encoding: "utf-8"
-                        }
-                    }
-      console.log(getURL);
-      Promise.promisifyAll(HTTP);
-      return HTTP.callAsync("GET",getURL,options)
-        .then((response) => {
-          console.log("meteor server response timestamp");
-          //console.log(response);
-          return response.content;
-        })
-        .catch((err) => {
-          console.log("meteor server error timestamp");
-          return err;
-        })
-    }
-  })
+  const appConfig = require("./app-config")(settings);
+  const bootstrap = require("./boot")(appConfig);
+  const server = require("./server")(appConfig);
+  const log = require("debug")("nqm-app:main");
+  const http = require("http");
+
+  return bootstrap()
+    .then(() => {
+      // Get port from environment and store in Express.
+      const port = normalizePort(settings.appPort || process.env.PORT || "8082");
+      server.set("port", port);
+
+      // Create HTTP server.
+      const httpServer = http.createServer(server);
+
+      // Listen on provided port, on all network interfaces.
+      httpServer.listen(port, "127.0.0.1");
+      httpServer.on("error", onError);
+      httpServer.on("listening", onListening);
+
+      // Normalize a port into a number, string, or false.
+      function normalizePort(val) {
+        const port = parseInt(val, 10);
+
+        if (isNaN(port)) {
+          // named pipe
+          return val;
+        }
+
+        if (port >= 0) {
+          // port number
+          return port;
+        }
+
+        return false;
+      }
+
+      // Event listener for HTTP server "error" event.
+      function onError(error) {
+        if (error.syscall !== "listen") {
+          throw error;
+        }
+
+        const bind = typeof port === "string" ? `Pipe ${port}` : `Port ${port}`;
+
+        // handle specific listen errors with friendly messages
+        switch (error.code) {
+          case "EACCES":
+            log(`ABORTING - ${bind} requires elevated privileges`);
+            process.exit(1);
+            break;
+          case "EADDRINUSE":
+            log(`ABORTING - ${bind} is already in use`);
+            process.exit(1);
+            break;
+          default:
+            throw error;
+        }
+      }
+
+      // Event listener for HTTP server "listening" event.
+      function onListening() {
+        const addr = httpServer.address();
+        const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+        log(`Listening on ${bind}`);
+      }
+    })
+    .catch((err) => {
+      log("failed to boot [%s]", err.message);
+      throw err;
+    });
 });

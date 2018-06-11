@@ -1,0 +1,134 @@
+{
+  "jspm": {
+    "name": "nqm-app-highway",
+    "main": "main.js",
+    "dependencies": {
+      "@babel/runtime": "npm:@babel/runtime@^7.0.0-beta.47",
+      "@material-ui/icons": "npm:@material-ui/icons@^1.0.0",
+      "@nqminds/nqm-tdx-client": "npm:@nqminds/nqm-tdx-client@^0.5.0",
+      "classnames": "npm:classnames@^2.2.5",
+      "css": "github:systemjs/plugin-css@^0.1.35",
+      "debug": "npm:debug@^2.6.8",
+      "jss-camel-case": "npm:jss-camel-case@^6.0.0",
+      "jss-default-unit": "npm:jss-default-unit@^8.0.0",
+      "jss-global": "npm:jss-global@^3.0.0",
+      "jss-nested": "npm:jss-nested@^6.0.1",
+      "jss-props-sort": "npm:jss-props-sort@^6.0.0",
+      "jss-theme-reactor": "npm:jss-theme-reactor@^0.11.1",
+      "jss-vendor-prefixer": "npm:jss-vendor-prefixer@^7.0.0",
+      "moment": "npm:moment@^2.18.1",
+      "nqm-mantra-core": "npm:nqm-mantra-core@^1.8.1",
+      "react-leaflet": "npm:react-leaflet@^1.9.1",
+      "react-router": "npm:react-router@^4.1.1",
+      "react-router-dom": "npm:react-router-dom@^4.1.1",
+      "readable-stream": "npm:readable-stream@^2.3.3",
+      "redbox-react": "npm:redbox-react@^1.3.6",
+      "redux": "npm:redux@^3.6.0"
+    },
+    "devDependencies": {
+      "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@^6.24.1",
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.24.1",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.21",
+      "systemjs-hot-reloader": "npm:systemjs-hot-reloader@^1.1.0"
+    },
+    "peerDependencies": {
+      "@material-ui/core": "npm:@material-ui/core@^1.0.0",
+      "assert": "npm:jspm-nodelibs-assert@^0.2.0",
+      "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",
+      "constants": "npm:jspm-nodelibs-constants@^0.2.0",
+      "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
+      "domain": "npm:jspm-nodelibs-domain@^0.2.0",
+      "events": "npm:jspm-nodelibs-events@^0.2.0",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "http": "npm:jspm-nodelibs-http@^0.2.0",
+      "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "jss": "npm:jss@^9.0.0",
+      "leaflet": "npm:leaflet@^1.3.1",
+      "lodash": "npm:lodash@^4.17.4",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "prop-types": "npm:prop-types@^15.5.10",
+      "react": "npm:react@^16.0.0",
+      "react-dom": "npm:react-dom",
+      "stream": "npm:jspm-nodelibs-stream@^0.2.0",
+      "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "tty": "npm:jspm-nodelibs-tty@^0.2.0",
+      "url": "npm:jspm-nodelibs-url@^0.2.0",
+      "util": "npm:jspm-nodelibs-util@^0.2.0",
+      "vm": "npm:jspm-nodelibs-vm@^0.2.0",
+      "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
+    },
+    "overrides": {
+      "npm:bluebird@3.5.1": {
+        "meta": {
+          "js/browser/bluebird.js": {
+            "format": "global"
+          },
+          "js/browser/bluebird.min.js": {
+            "format": "global"
+          }
+        }
+      },
+      "npm:browserify-zlib@0.1.4": {
+        "dependencies": {
+          "readable-stream": "^2.0.2",
+          "pako": "~0.2.0"
+        },
+        "map": {
+          "_stream_transform": "readable-stream/transform"
+        }
+      },
+      "npm:debug@2.6.9": {
+        "main": "src/browser.js",
+        "jspmNodeConversion": false,
+        "format": "cjs",
+        "map": {
+          "./src/browser.js": {
+            "node": "./src/node.js"
+          },
+          "./node.js": {
+            "browser": "./src/browser.js"
+          },
+          "fs": "@node/fs",
+          "net": "@node/net",
+          "tty": "@node/tty",
+          "util": "@node/util"
+        }
+      },
+      "npm:inherits@2.0.3": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:leaflet@1.3.1": {
+        "jspmNodeConversion": false
+      },
+      "npm:lodash@4.17.10": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
+      },
+      "npm:moment@2.18.1": {
+        "jspmNodeConversion": false
+      },
+      "npm:pbkdf2@3.0.16": {
+        "main": "browser.js"
+      },
+      "npm:safe-buffer@5.1.2": {
+        "browser": "index.js"
+      }
+    }
+  },
+  "name": "nqm-app-highway",
+  "version": "0.2.0",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ivan@nqminds.com",
+  "license": "ISC",
+  "description": ""
+}
