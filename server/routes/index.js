@@ -7,8 +7,10 @@ module.exports = (function(config) {
   const jwt = require("jsonwebtoken");
   const nqmUtils = require("nqm-core-utils");
   const request = require("request");
+  const fetch = require("cross-fetch");
   const requestIP = require("request-ip");
   const TDXApi = require("@nqminds/nqm-api-tdx");
+  const btoa = require("btoa");
 
   const setUserSession = function(req, res, redirectTo) {
     if (req.query.access_token) {
@@ -65,30 +67,39 @@ module.exports = (function(config) {
     });
   });
 
-  router.get("/camera", function(req, res) {
+  router.get("/camera/:id", function(req, res) {
     const headers = {
-      Referer: `http://public.highwaystrafficcameras.co.uk/cctvpublicaccess/html/${req.query.id}.html`,
+      Referer: `http://public.highwaystrafficcameras.co.uk/cctvpublicaccess/html/${req.params.id}.html`,
       "Content-Type": "image/jpeg",
+      Host: "public.highwaystrafficcameras.co.uk",
+      Connection: "keep-alive",
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.79 Safari/537.36",
+      Accept: "image/webp,image/apng,image/*,*/*;q=0.8",
+      "Accept-Encoding": "gzip, deflate",
+      "Accept-Language": "en-US,en;q=0.9",
     };
-    const url = `http://public.highwaystrafficcameras.co.uk/cctvpublicaccess/images/${req.query.id}.jpg?sid=${Math.random()}`;
-  
-    return fetch(url, {headers})
-      .then((response) => {
-        console.log(response);
-        return response.body;
-      })
-      .then((blob) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            res.json({image: event.target.result});
-          };
-          reader.readAsDataURL(blob);
+    const url = `http://public.highwaystrafficcameras.co.uk/cctvpublicaccess/images/${req.params.id}.jpg?sid=${Math.random()}`;
+    if (req.params.id !== "-1") {
+      return fetch(url, {headers})
+        .then((response) => {
+          return response.arrayBuffer();
+        })
+        .then((buffer) => {
+          let binary = "";
+          const bytes = new Uint8Array( buffer );
+          const len = bytes.byteLength;
+          for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[i] );
+          }
+          const base64 = btoa(binary);
+          res.send({image: base64});
+        })
+        .catch((err) => {
+          log("Couldn't get image");
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    } else {
+      res.send({image: false});
+    }
   });
 
   router.get("*", function(req, res) {

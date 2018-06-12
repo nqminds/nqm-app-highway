@@ -4,27 +4,9 @@ import Component from "../components/camera";
 const dataMapper = ({
   camera,
 }) => {
-  console.log(camera);
-  const headers = {
-    Referer: `http://public.highwaystrafficcameras.co.uk/cctvpublicaccess/html/${camera}.html`,
-    "Content-Type": "image/jpeg",
-    "X-Content-Type-Options": "nosniff"
-  };
-  const url = `http://public.highwaystrafficcameras.co.uk/cctvpublicaccess/images/${camera}.jpg?sid=${Math.random()}`;
-
-  return fetch(url, {headers, mode: "no-cors"})
-    .then((response) => response.blob())
-    .then((blob) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          resolve({image: event.target.result});
-        };
-        reader.readAsDataURL(blob);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+  return fetch(`/camera/${camera}`)
+    .then((response) => {
+      return response.json();
     });
 };
 
@@ -34,7 +16,7 @@ const reduxMapper = (state) => {
   };
 };
 
-const depsMapper = ({constants, store, tdxConnections}, actions) => {
+const depsMapper = ({store}, actions) => {
   return {
     store,
   };

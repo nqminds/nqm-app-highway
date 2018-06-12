@@ -60,5 +60,5 @@ a {
 
 .leaflet-container {
   height: 1080px;
-  width: 1920px;
+  width: 100%;
 }

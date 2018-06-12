@@ -2,6 +2,7 @@ import {compose, merge, promiseFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import Component from "../components/home";
 import data from "./data";
 const dataMapper = ({
+  camera,
   connectionManager,
   datasetId,
 }) => {
@@ -13,13 +14,14 @@ const dataMapper = ({
   return {data};
 };
 
-const depsMapper = ({constants, tdxConnections}, actions) => {
+const depsMapper = ({constants, store, tdxConnections}, actions) => {
   return {
     connectionManager: tdxConnections.defaultTDX,
     datasetId: constants.datasetId,
     leafletKey: constants.leafletKey,
     leafletUser: constants.leafletUser,
     setCamera: actions.core.setCamera,
+    store,
   };
 };
 

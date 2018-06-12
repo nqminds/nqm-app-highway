@@ -22,7 +22,7 @@ export const defaultCoreState = {
   darkTheme: false,
   profile: {},
   userDataFolderId: "",
-  camera: null,
+  camera: -1,
 };
 
 export function core(state = defaultCoreState, action) {
